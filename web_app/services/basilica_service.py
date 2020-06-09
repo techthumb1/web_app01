@@ -1,8 +1,14 @@
 
-
+import os
 import basilica
-with basilica.Connection('579a7484-3ec5-33f4-cd05-f72712c2590e') as c:
-    print(type(connection))
-    sentences = ['Hello World!', 'How are you?']
+from dotenv import load_dotenv
+load_dotenv() # parse the .env file for environment variables
+BASILICA_API_KEY = os.getenv("BASILICA_API_KEY")
+connection = basilica.Connection(BASILICA_API_KEY)
+#def basilica_api_client():
+#    return basilica.Connection(BASILICA_API_KEY)
+if __name__ == "__main__":
+    print(type(connection)) #> <basilica.Connection object at 0x102081b10>
+    sentences = ["Hello world!", "How are you?"]
     embeddings = connection.embed_sentences(sentences)
     print(list(embeddings))
